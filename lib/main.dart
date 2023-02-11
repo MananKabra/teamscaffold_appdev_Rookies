@@ -2,12 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodonline/pages/home/home_page.dart';
 import 'package:foodonline/pages/sign_up/components/login_auth_provider.dart';
+import 'package:foodonline/pages/sign_up/components/seller_auth_order.dart';
+import 'package:foodonline/pages/sign_up/components/signup_auth_buyer.dart';
 import 'package:foodonline/pages/sign_up/components/signup_auth_provider.dart';
 import 'package:foodonline/pages/start/starting_page.dart';
 import 'package:provider/provider.dart';
 import 'pages/welcome/welcome_page.dart';
 import 'pages/sign_up/signup_page_seller.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:foodonline/pages/sign_up/components/login_auth_buyer.dart';
+
+// import 'package:foodonline/pages/sign_up/components/signup_auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +29,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (context) => SignupAuthProvider(),
+          create: (context) => SignupAuthSeller(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginAuthBuyer(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SignupAuthBuyer(),
         ),
         ChangeNotifierProvider(
           create: (context) => LoginAuthProvider(),
@@ -34,8 +45,8 @@ class MyApp extends StatelessWidget {
         debugShowMaterialGrid: false,
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context,userSnp){
-            if(userSnp.hasData){
+          builder: (context, userSnp) {
+            if (userSnp.hasData) {
               return HomePage();
             }
             return StartingPage();
