@@ -5,15 +5,13 @@ import 'package:foodonline/pages/sign_up/signup_page_seller.dart';
 import 'package:provider/provider.dart';
 
 class LoginPageBuyer extends StatelessWidget {
-
-
-  TextEditingController  emailAddress = TextEditingController();
-  TextEditingController  password = TextEditingController();
+  TextEditingController emailAddress = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-    LoginAuthProvider loginAuthProvider = Provider.of<LoginAuthProvider>(context);
+    LoginAuthProvider loginAuthProvider =
+        Provider.of<LoginAuthProvider>(context);
 
     return Scaffold(
       appBar: AppBar(),
@@ -26,44 +24,37 @@ class LoginPageBuyer extends StatelessWidget {
               Text('Buyer Login'),
               TextFormField(
                 controller: emailAddress,
-                decoration: InputDecoration(
-                    hintText: 'Email Address'
-                ),
+                decoration: InputDecoration(hintText: 'Email Address'),
               ),
               TextFormField(
                 controller: password,
                 obscureText: true,
-                decoration: InputDecoration(
-                    hintText: 'Password'
-                ),
+                decoration: InputDecoration(hintText: 'Password'),
               ),
               SizedBox(height: 20),
-              (loginAuthProvider.loading==false)?
-              MaterialButton(
-                  onPressed: (){
-                    loginAuthProvider.loginValidation(emailAddress: emailAddress, password: password,context: context);
-                  },
-                  height: 50,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(04)
-                  ),
-                  color: Colors.red,
-                  child: Text(
-                      'Login'
-                  )
-              ):Center(
-                child: CircularProgressIndicator(),
-              ),
+              (loginAuthProvider.loading == false)
+                  ? MaterialButton(
+                      onPressed: () {
+                        loginAuthProvider.loginValidation(
+                            emailAddress: emailAddress,
+                            password: password,
+                            context: context);
+                      },
+                      height: 50,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(04)),
+                      color: Colors.red,
+                      child: Text('Login'))
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
               SizedBox(height: 20),
               GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => SignUpPageBuyer())
-                  );
-                },
-                  child: Text('SIGNUP')
-              )
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SignUpPageBuyer()));
+                  },
+                  child: Text('SIGNUP'))
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foodonline/pages/home/home_page.dart';
+import '/pages/home/home_page.dart';
 import 'package:foodonline/pages/sign_up/components/login_auth_provider.dart';
 import 'package:foodonline/pages/sign_up/components/signup_auth_provider.dart';
 import 'package:foodonline/pages/start/starting_page_seller.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (context) => SignupAuthProvider(),
+          create: (context) => SignupAuthProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => LoginAuthProvider(),
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
         debugShowMaterialGrid: false,
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context,userSnp){
-            if(userSnp.hasData){
+          builder: (context, userSnp) {
+            if (userSnp.hasData) {
               return HomePage();
             }
             return StartingPage();
