@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodonline/pages/seller_order/seller_order_details.dart';
 import 'package:foodonline/pages/sign_up/components/login_auth_provider.dart';
 import 'package:foodonline/pages/sign_up/signup_page_seller.dart';
 import 'package:provider/provider.dart';
@@ -99,7 +100,7 @@ class LoginPageSeller extends StatelessWidget {
                       onTap: (){
                         Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => StartingPage())
+                                builder: (context) => SellerOrderDetails())
                         );
                       },
                       child: Text('STARTING')
