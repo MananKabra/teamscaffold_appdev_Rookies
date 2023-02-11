@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../start/starting_page.dart';
 import 'components/signup_auth_provider.dart';
-
+bool changeButton = false;
 
 class SignUpPageBuyer extends StatefulWidget {
   const SignUpPageBuyer({Key? key}) : super(key: key);
@@ -14,89 +14,121 @@ class SignUpPageBuyer extends StatefulWidget {
 }
 
 class _SignUpPageBuyerState extends State<SignUpPageBuyer> {
-
   TextEditingController fullName = TextEditingController();
-  TextEditingController  emailAddress = TextEditingController();
-  TextEditingController  password = TextEditingController();
+  TextEditingController emailAddress = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  get loginAuthProvider => null;
 
   @override
   Widget build(BuildContext context) {
-
-    SignupAuthProvider signupAuthProvider = Provider.of<SignupAuthProvider>(context);
+    SignupAuthProvider signupAuthProvider =
+    Provider.of<SignupAuthProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text('Buyer Signup'),
-              TextFormField(
-                controller: fullName,
-                decoration: InputDecoration(
-                    hintText: 'Full name'
-                ),
-              ),
-              TextFormField(
-                controller: emailAddress,
-                decoration: InputDecoration(
-                    hintText: 'Email Address'
-                ),
-              ),
-              TextFormField(
-                controller: password,
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                ),
-              ),
-              SizedBox(height: 20),
-              (signupAuthProvider!.loading==false)? MaterialButton(
-                  onPressed: (){
-                    signupAuthProvider.signupValidation(fullName: fullName, emailAddress: emailAddress, password: password,context: context);
-                  },
-                  height: 50,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(04)
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text('Buyer Signup',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 59, 128, 232),
+                    )),
+                Image.asset('images/login.jpg', height: 200, width: 200),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: fullName,
+                  decoration: InputDecoration(
+                    hintText: 'Full name',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      gapPadding: 10,
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
+                    ),
                   ),
-                  color: Colors.red,
-                  child: Text(
-                      'Sign Up'
-                  )
-              ): Center(
-                child: CircularProgressIndicator(),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context)=>LoginPageBuyer())
-                    );
-                  },
-                  child: Text('LOGIN')
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => StartingPage())
-                    );
-                  },
-                  child: Text('STARTING')
-              )
-            ],
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: emailAddress,
+                  decoration: InputDecoration(
+                    hintText: 'Email Address',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: password,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                (signupAuthProvider!.loading == false)
+                    ? Material(
+                  color: Color.fromARGB(255, 33, 201, 198),
+                  borderRadius:
+                  BorderRadius.circular(changeButton ? 50 : 20),
+                  child: InkWell(
+                    onTap: (){
+                      signupAuthProvider.signupValidation(fullName: fullName, emailAddress: emailAddress, password: password,context: context);
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      width: changeButton ? 50 : 150,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: changeButton
+                          ? Icon(
+                        Icons.done,
+                        color: Colors.white,
+                      )
+                          : Text(
+                        'SignUp',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                )
+                    : Center(
+                  child: CircularProgressIndicator(),
+                ),
+                SizedBox(height: 20),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LoginPageBuyer()));
+                    },
+                    child: Text('LOGIN')),
+                GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => StartingPage())
+                      );
+                    },
+                    child: Text('STARTING')
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
