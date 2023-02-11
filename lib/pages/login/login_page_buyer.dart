@@ -3,7 +3,8 @@ import 'package:foodonline/pages/sign_up/components/login_auth_provider.dart';
 import 'package:foodonline/pages/sign_up/signup_page_seller.dart';
 import 'package:provider/provider.dart';
 
-import '../start/starting_page_seller.dart';
+import '../sign_up/signup_page_buyer.dart';
+import '../start/starting_page.dart';
 
 class LoginPageBuyer extends StatelessWidget {
 
@@ -30,7 +31,7 @@ class LoginPageBuyer extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Seller Login'),
+                  Text('Buyer Login'),
                   Image.asset(
                     'images/login.jpg',
                     fit: BoxFit.cover,
@@ -88,7 +89,7 @@ class LoginPageBuyer extends StatelessWidget {
                       onTap: (){
                         Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => SignUpPageSeller())
+                                builder: (context) => SignUpPageBuyer())
                         );
                       },
                       child: Text('SIGNUP')

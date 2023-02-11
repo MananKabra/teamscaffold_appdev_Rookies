@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodonline/pages/login/login_page_buyer.dart';
 import 'package:provider/provider.dart';
 
-import '../start/starting_page_seller.dart';
+import '../start/starting_page.dart';
 import 'components/signup_auth_provider.dart';
 
 

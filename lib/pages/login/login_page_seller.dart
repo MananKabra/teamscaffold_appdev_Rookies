@@ -3,7 +3,7 @@ import 'package:foodonline/pages/sign_up/components/login_auth_provider.dart';
 import 'package:foodonline/pages/sign_up/signup_page_seller.dart';
 import 'package:provider/provider.dart';
 
-import '../start/starting_page_seller.dart';
+import '../start/starting_page.dart';
 
 class LoginPageSeller extends StatelessWidget {
 

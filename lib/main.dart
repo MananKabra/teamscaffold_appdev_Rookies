@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodonline/pages/home/home_page.dart';
 import 'package:foodonline/pages/sign_up/components/login_auth_provider.dart';
 import 'package:foodonline/pages/sign_up/components/signup_auth_provider.dart';
-import 'package:foodonline/pages/start/starting_page_seller.dart';
+import 'package:foodonline/pages/start/starting_page.dart';
 import 'package:provider/provider.dart';
 import 'pages/welcome/welcome_page.dart';
 import 'pages/sign_up/signup_page_seller.dart';
