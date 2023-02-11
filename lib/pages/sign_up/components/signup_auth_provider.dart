@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodonline/pages/seller_order/seller_intro_page.dart';
 import 'package:foodonline/pages/seller_order/seller_order_details.dart';
 
 import '../../home/home_page.dart';
@@ -54,7 +55,7 @@ class SignupAuthSeller with ChangeNotifier {
 
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => SellerOrderDetails(),
+              builder: (context) => SellerIntro(),
             ),
           );
         });

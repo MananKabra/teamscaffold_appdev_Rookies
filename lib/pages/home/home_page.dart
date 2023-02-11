@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foodonline/pages/bottombar/bottom_nav.dart';
 import 'package:foodonline/pages/login/login_page_seller.dart';
@@ -10,6 +11,31 @@ import 'package:foodonline/pages/home/home_page.dart';
 import '../login/login_page_buyer.dart';
 
 //late UserModel userModel;
+
+class User {
+  final String foodName;
+  final String foodPrice;
+  final String nos;
+  final String foodType;
+  final String providerName;
+
+  User(
+      {required this.foodName,
+      required this.foodPrice,
+      required this.nos,
+      required this.foodType,
+      required this.providerName});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      foodName: json['foodName'],
+      foodPrice: json['foodPrice'],
+      nos: json['nos'],
+      foodType: json['foodType'],
+      providerName: json['providerName'],
+    );
+  }
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,6 +58,31 @@ class _HomePageState extends State<HomePage> {
   //         }
   //   });
   // }
+
+  final CollectionReference _foodorder =
+      FirebaseFirestore.instance.collection('food');
+
+  // _foodorder.doc('food').get().then((DocumentSnapshot documentSnapshot) {
+  //   if (documentSnapshot.exists) {
+  //     print('Document data: ${documentSnapshot.data()}');
+  //   } else {
+  //     print('Document does not exist on the database');
+  //   }
+  // });
+  void dataRead() async {
+    final ref = FirebaseDatabase.instance.ref();
+    final snapshot = await ref.child('food/f').get();
+    print(snapshot);
+    print('Data Read');
+
+    Stream<List<User>> readUsers() => FirebaseFirestore.instance
+        .collection('food')
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+
+    print(snapshot);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +205,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            MaterialButton(
+                onPressed: () {
+                  dataRead();
+                },
+                color: Colors.red,
+                child: Text("Read Data"))
           ],
         ));
   }
