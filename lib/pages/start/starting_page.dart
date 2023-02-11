@@ -19,49 +19,44 @@ class _StartingPageState extends State<StartingPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/s1.jpg'),
+            image: AssetImage('images/makescreen.png'),
             fit: BoxFit.cover,
           ),
         ),
         //color: kwhite,
         child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MaterialButton(
-                  height: 50,
-                  onPressed: (){
-                    RoutingPage.goToNext(context: context, navigateTo: LoginPageBuyer());
-                  },
-                  color: kLightGreen,
-                  child: Text(
-                    'Start Eating',
-                    style: TextStyle(
-                        color: kwhite,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                MaterialButton(
-                  height: 50,
-                  onPressed: (){
-                    RoutingPage.goToNext(context: context, navigateTo: LoginPageSeller());
-                  },
-                  color: kLightGreen,
-                  child: Text(
-                    'Start Selling',
-                    style: TextStyle(
-                        color: kwhite,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                )
-              ],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+              height: 50,
+              onPressed: () {
+                RoutingPage.goToNext(
+                    context: context, navigateTo: LoginPageBuyer());
+              },
+              color: Color.fromARGB(255, 4, 105, 113),
+              child: Text(
+                'Consumer',
+                style: TextStyle(
+                    color: kwhite, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 20),
+            MaterialButton(
+              height: 50,
+              onPressed: () {
+                RoutingPage.goToNext(
+                    context: context, navigateTo: LoginPageSeller());
+              },
+              color: Color.fromARGB(255, 4, 105, 113),
+              child: Text(
+                'Provider',
+                style: TextStyle(
+                    color: kwhite, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             )
-        ),
+          ],
+        )),
       ),
     );
   }

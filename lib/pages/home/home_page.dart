@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodonline/pages/bottombar/bottom_nav.dart';
+import 'package:foodonline/pages/login/login_page_seller.dart';
 import 'package:foodonline/pages/model/uder_model.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:foodonline/pages/home/home_page.dart';
 
 import '../login/login_page_buyer.dart';
 
@@ -66,6 +69,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 4, 202, 247),
           actions: [
             IconButton(
                 onPressed: () {
@@ -167,7 +171,7 @@ class SingleProduct extends StatelessWidget {
       margin: EdgeInsets.all(12),
       height: 200,
       width: 150,
-      color: Colors.red,
+      color: Color.fromARGB(255, 207, 194, 193),
       child: Column(
         children: [Image(image: NetworkImage('')), Text(name)],
       ),
