@@ -10,30 +10,34 @@ class SignupAuthProvider with ChangeNotifier {
   UserCredential? userCredential;
   bool loading = false;
 
-  void signupValidation(
-      {required TextEditingController? fullName,
-      required TextEditingController? emailAddress,
-      required TextEditingController? password,
-      required BuildContext context}) async {
-    if (fullName!.text.trim().isEmpty) {
+  void sellerOrderValidation(
+      {required TextEditingController? foodName,
+        required TextEditingController? foodPrice,
+        required TextEditingController? nos,
+        required String foodType,
+        required BuildContext context}) async {
+    if (foodName!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Full name is Empty")));
+          .showSnackBar(SnackBar(content: Text("Food Name is Empty")));
       return;
-    } else if (emailAddress!.text.trim().isEmpty) {
+    } else if (foodPrice!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Email Address is Empty")));
+          .showSnackBar(SnackBar(content: Text("Foor Price is Empty")));
       return;
-    } else if (password!.text.trim().isEmpty) {
+    } else if (nos!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Password is Empty")));
+          .showSnackBar(SnackBar(content: Text("Quantity is Empty")));
+      return;
+    } else if(foodType! == ''){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Food Type is Empty")));
       return;
     } else {
       try {
         loading = true;
         notifyListeners();
         userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-                email: emailAddress.text, password: password.text);
+            .createUserWithEmailAndPassword();
 
         loading = true;
         notifyListeners();
