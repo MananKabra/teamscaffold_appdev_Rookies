@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodonline/pages/model/uder_model.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import '../login/login_page_buyer.dart';
 
@@ -15,8 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   // Future getCurrentUserDataFunction() async {
   //   await FirebaseFirestore.instance
   //       .collection("users")
@@ -34,16 +33,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 61, 213, 240),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                    color: Colors.purple
-                ),
+                decoration: BoxDecoration(color: Colors.purple),
                 accountName: Text("NAME"),
-                accountEmail :Text("emailaddress@gmail.com"),
+                accountEmail: Text("emailaddress@gmail.com"),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.pink,
                 ),
@@ -70,16 +68,12 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           actions: [
             IconButton(
-                onPressed: (){
-                  FirebaseAuth.instance.signOut().then((value) => Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => LoginPageBuyer()
-                      )
-                  )
-                  );
+                onPressed: () {
+                  FirebaseAuth.instance.signOut().then((value) =>
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LoginPageBuyer())));
                 },
-                icon: Icon(Icons.exit_to_app)
-            )
+                icon: Icon(Icons.exit_to_app))
           ],
         ),
         body: ListView(
@@ -94,29 +88,39 @@ class _HomePageState extends State<HomePage> {
                       prefixIcon: Icon(Icons.search),
                       hintText: 'Search',
                       filled: true,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none
-                      )
-                  ),
+                      border: OutlineInputBorder(borderSide: BorderSide.none)),
                 ),
               ),
             ),
             ListTile(
-              leading: Text('Categories',style: TextStyle(fontSize: 20),),
+              leading: Text(
+                'Categories',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  Categories(),
-                  Categories(),
-                  Categories()
+                  Categories(
+                    imgdir: 'images/dinner.png',
+                    foodname: 'Dinner',
+                  ),
+                  Categories(imgdir: 'images/lunch.png', foodname: 'Lunch'),
+                  Categories(
+                      imgdir: 'images/breakfast.png', foodname: 'Breakfast'),
+                  Categories(imgdir: 'images/snacks.png', foodname: 'Snack'),
+                  Categories(
+                      imgdir: 'images/otherfood.png', foodname: 'Other Food'),
                 ],
               ),
             ),
             ListTile(
-              leading: Text('Products',style: TextStyle(fontSize: 20),),
+              leading: Text(
+                'Products',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -130,7 +134,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              leading: Text('Best Sells',style: TextStyle(fontSize: 20),),
+              leading: Text(
+                'Best Sells',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -144,12 +151,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }
-
-
 
 class SingleProduct extends StatelessWidget {
   SingleProduct({required this.price, required this.name});
@@ -165,32 +169,55 @@ class SingleProduct extends StatelessWidget {
       width: 150,
       color: Colors.red,
       child: Column(
-        children: [
-          Image(image: NetworkImage('https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F44%2F2022%2F11%2F17%2Farticle_291139_the-top-10-healthiest-foods-for-kids_-02.jpg&q=60')),
-          Text('\$$price'),
-          Text(name)
-        ],
+        children: [Image(image: NetworkImage('')), Text(name)],
       ),
     );
   }
 }
 
-
-
 class Categories extends StatelessWidget {
-  const Categories({Key? key}) : super(key: key);
+  Categories({required this.imgdir, required this.foodname});
+
+  final String imgdir;
+  final String foodname;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(12),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          offset: Offset(0, 0),
+          spreadRadius: -3,
+          blurRadius: 15,
+          color: Color.fromRGBO(96, 88, 88, 1),
+        )
+      ], image: DecorationImage(image: AssetImage(imgdir), fit: BoxFit.cover)),
+      child: TextButton(
+        onPressed: () {},
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GradientText(
+              '$foodname',
+              style: TextStyle(
+                backgroundColor: Color.fromARGB(255, 4, 202, 247),
+                fontSize: 20.0,
+              ),
+              colors: [
+                Color.fromARGB(255, 171, 211, 250),
+                Color.fromARGB(255, 249, 243, 242),
+                Color.fromARGB(255, 144, 144, 239),
+              ],
+            ),
+          ],
+        ),
+      ),
       height: 100,
       width: 170,
-      color: Colors.blue,
     );
   }
 }
-
 
 class DrawerItems extends StatelessWidget {
   DrawerItems({required this.title, required this.icon});
@@ -201,9 +228,7 @@ class DrawerItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(
-        icon
-      ),
+      leading: Icon(icon),
       title: title,
     );
   }
