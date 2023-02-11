@@ -12,10 +12,10 @@ class SignupAuthProvider with ChangeNotifier {
 
   void sellerOrderValidation(
       {required TextEditingController? foodName,
-        required TextEditingController? foodPrice,
-        required TextEditingController? nos,
-        required String foodType,
-        required BuildContext context}) async {
+      required TextEditingController? foodPrice,
+      required TextEditingController? nos,
+      required String foodType,
+      required BuildContext context}) async {
     if (foodName!.text.trim().isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Food Name is Empty")));
@@ -28,7 +28,7 @@ class SignupAuthProvider with ChangeNotifier {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Quantity is Empty")));
       return;
-    } else if(foodType! == ''){
+    } else if (foodType! == '') {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Food Type is Empty")));
       return;
@@ -36,8 +36,8 @@ class SignupAuthProvider with ChangeNotifier {
       try {
         loading = true;
         notifyListeners();
-        userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword();
+        // userCredential = await FirebaseAuth.instance
+        //     .createUserWithEmailAndPassword();
 
         loading = true;
         notifyListeners();
@@ -47,10 +47,10 @@ class SignupAuthProvider with ChangeNotifier {
             .doc(userCredential!.user!.uid)
             .set(
           {
-            "Fullname": fullName.text,
-            "emailAddress": emailAddress.text,
-            "password": password.text,
-            "userUID": userCredential!.user!.uid
+            // "Fullname": fullName.text,
+            // "emailAddress": emailAddress.text,
+            // "password": password.text,
+            // "userUID": userCredential!.user!.uid
           },
         ).then((value) {
           loading = false;
@@ -66,16 +66,17 @@ class SignupAuthProvider with ChangeNotifier {
         loading = false;
         notifyListeners();
 
-        if(e.code == 'weak-password'){
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("weak-password"),
-          ),
+        if (e.code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("weak-password"),
+            ),
           );
-        }
-        else if(e.code == 'email-already-in-use'){
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("email-already-in-use"),
-          ),
+        } else if (e.code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("email-already-in-use"),
+            ),
           );
         }
       }

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../start/starting_page.dart';
 import 'components/signup_auth_provider.dart';
+
 bool changeButton = false;
 
 class SignUpPageSeller extends StatefulWidget {
@@ -22,8 +23,8 @@ class _SignUpPageSellerState extends State<SignUpPageSeller> {
 
   @override
   Widget build(BuildContext context) {
-    SignupAuthProvider signupAuthProvider =
-    Provider.of<SignupAuthProvider>(context);
+    SignupAuthSeller signupAuthProvider =
+        Provider.of<SignupAuthSeller>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -78,36 +79,40 @@ class _SignUpPageSellerState extends State<SignUpPageSeller> {
                 SizedBox(height: 20),
                 (signupAuthProvider!.loading == false)
                     ? Material(
-                  color: Color.fromARGB(255, 33, 201, 198),
-                  borderRadius:
-                  BorderRadius.circular(changeButton ? 50 : 20),
-                  child: InkWell(
-                    onTap: (){
-                      signupAuthProvider.signupValidation(fullName: fullName, emailAddress: emailAddress, password: password,context: context);
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      width: changeButton ? 50 : 150,
-                      height: 40,
-                      alignment: Alignment.center,
-                      child: changeButton
-                          ? Icon(
-                        Icons.done,
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 33, 201, 198),
+                        borderRadius:
+                            BorderRadius.circular(changeButton ? 50 : 20),
+                        child: InkWell(
+                          onTap: () {
+                            signupAuthProvider.signupValidation(
+                                fullName: fullName,
+                                emailAddress: emailAddress,
+                                password: password,
+                                context: context);
+                          },
+                          child: AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            width: changeButton ? 50 : 150,
+                            height: 40,
+                            alignment: Alignment.center,
+                            child: changeButton
+                                ? Icon(
+                                    Icons.done,
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    'SignUp',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                          ),
+                        ),
                       )
-                          : Text(
-                        'SignUp',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                )
                     : Center(
-                  child: CircularProgressIndicator(),
-                ),
+                        child: CircularProgressIndicator(),
+                      ),
                 SizedBox(height: 20),
                 GestureDetector(
                     onTap: () {
@@ -116,14 +121,11 @@ class _SignUpPageSellerState extends State<SignUpPageSeller> {
                     },
                     child: Text('LOGIN')),
                 GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => StartingPage())
-                      );
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => StartingPage()));
                     },
-                    child: Text('STARTING')
-                )
+                    child: Text('STARTING'))
               ],
             ),
           ),

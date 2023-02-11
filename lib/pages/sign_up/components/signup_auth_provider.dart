@@ -6,7 +6,7 @@ import 'package:foodonline/pages/seller_order/seller_order_details.dart';
 
 import '../../home/home_page.dart';
 
-class SignupAuthProvider with ChangeNotifier {
+class SignupAuthSeller with ChangeNotifier {
   UserCredential? userCredential;
   bool loading = false;
 
@@ -62,16 +62,17 @@ class SignupAuthProvider with ChangeNotifier {
         loading = false;
         notifyListeners();
 
-        if(e.code == 'weak-password'){
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("weak-password"),
-          ),
+        if (e.code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("weak-password"),
+            ),
           );
-        }
-        else if(e.code == 'email-already-in-use'){
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("email-already-in-use"),
-          ),
+        } else if (e.code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("email-already-in-use"),
+            ),
           );
         }
       }

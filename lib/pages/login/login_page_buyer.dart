@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../sign_up/signup_page_buyer.dart';
 import '../start/starting_page.dart';
+import 'package:foodonline/pages/sign_up/components/login_auth_buyer.dart';
 
 class LoginPageBuyer extends StatelessWidget {
   TextEditingController emailAddress = TextEditingController();
@@ -14,8 +15,7 @@ class LoginPageBuyer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginAuthProvider loginAuthProvider =
-        Provider.of<LoginAuthProvider>(context);
+    LoginAuthBuyer loginAuthBuyer = Provider.of<LoginAuthBuyer>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -71,7 +71,7 @@ class LoginPageBuyer extends StatelessWidget {
                         )),
                   ),
                   SizedBox(height: 20),
-                  (loginAuthProvider.loading == false)
+                  (loginAuthBuyer.loading == false)
                       ? Material(
                           color: Color.fromARGB(255, 33, 201, 198),
                           borderRadius:
@@ -80,7 +80,7 @@ class LoginPageBuyer extends StatelessWidget {
                           shadowColor: Color.fromARGB(255, 20, 21, 21),
                           child: InkWell(
                             onTap: () {
-                              loginAuthProvider.loginValidation(
+                              loginAuthBuyer.loginValidation(
                                   emailAddress: emailAddress,
                                   password: password,
                                   context: context);
