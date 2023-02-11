@@ -12,6 +12,8 @@ import 'pages/sign_up/signup_page_seller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:foodonline/pages/sign_up/components/login_auth_buyer.dart';
 
+// import 'package:foodonline/pages/sign_up/components/signup_auth_provider.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
